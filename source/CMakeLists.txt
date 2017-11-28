@@ -13,5 +13,7 @@ find_package(Boost REQUIRED COMPONENTS filesystem)
 # In tis case, this will also automatically add Boost::system which is
 # required for Boost::filesystem
 
+# Configure the actual library first
 add_subdirectory(banana)
+# Next, configure the demo applications
 add_subdirectory(apps)

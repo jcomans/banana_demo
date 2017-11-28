@@ -36,10 +36,14 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/banana
   DESTINATION include
   )
 
+# The banana box library is also a header only library, but with a
+# dependency on boost
 if(ENABLE_BANANA_BOX)
   add_subdirectory(src/box)
 endif()
 
+# The banana peel library has an actual implementation library for
+# its implementaion
 if(ENABLE_BANANA_PEEL)
   add_subdirectory(src/peel)
 endif()
@@ -47,7 +51,9 @@ endif()
 # The install(EXPORT command will generate and install a
 # bananaConfig.cmake file. This file can then be used in
 # a different CMake project by using find_package(banana).
-# As a result of this find package, all targets that have been
-# installed with the bananaConfig export (banana, banana_box, bana
 install(EXPORT bananaConfig DESTINATION share/banana/cmake)
+# The export command wil generate a bananaConfig.cmake file in the
+# current build directory. With this, external projects can also
+# use the library from the build directory using the same find_package
+# command as above. This is mainly usefull in development setups.
 export(EXPORT bananaConfig)
