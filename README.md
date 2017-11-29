@@ -100,7 +100,6 @@ cmake -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=Release -DBOOST_ROOT=
 On Windows, open the CMake GUI, and selct `source` and `build` as the source and build directory. Before clicking `Configure` and `Generate`, add the following variables to the cache:
 ```
 CMAKE_INSTALL_PREFIX: ../install
-CMAKE_BUILD_TYPE: Release
 BOOST_ROOT: <boost_dir>
 ```
 
