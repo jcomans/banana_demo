@@ -2,6 +2,15 @@
 # and only uses one source file
 add_library(banana_peel STATIC peel.cpp)
 
+# Create a namespaced alias
+add_library(Banana::peel ALIAS banana_peel)
+
+# When exporting the banana_peel target, the Banana:: namespace is added. This
+# would result in a Banana::banana_peel targt, which we don't want. We will adjust
+# the exported name to drop the banana_ part so that the end result will be
+# Banana::peel
+set_property(TARGET banana_peel PROPERTY EXPORT_NAME peel)
+
 # The library might be embeded in a shared object or dll later. On some
 # platforms (e.g. Linux) this requires building position indepenent code.
 # Instead of having a bunch of platform dependent code, we set the
@@ -19,11 +28,11 @@ target_compile_features(banana_peel PUBLIC cxx_std_11)
 # the client code will need to include the header directory
 target_link_libraries(banana_peel
   PUBLIC
-  banana
+  Banana::banana
   )
 
 # This time, we will be installing a file, so we need to specify a
 # destination next to our export definition
-install(TARGETS banana_peel EXPORT bananaConfig
+install(TARGETS banana_peel EXPORT BananaConfig
   ARCHIVE DESTINATION lib
   )

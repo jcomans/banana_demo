@@ -6,13 +6,13 @@ find_package(Boost REQUIRED COMPONENTS filesystem)
 
 # Import our library targets (banana, banana_box, banana_peel) with
 # find_package and the bananaConfig.cmake file created by CMake itself
-find_package(banana REQUIRED CONFIG)
+find_package(Banana REQUIRED CONFIG)
 
 add_executable(banana_client main.cpp)
 target_link_libraries(banana_client 
   PRIVATE
-  banana_box 
-  banana_peel
+  Banana::box 
+  Banana::peel
   # On windows, force normal linking instead of auto-linking through the pseudo targets
   # Boost::disable_autolinking Boost::dynamic_linking
   Boost::disable_autolinking

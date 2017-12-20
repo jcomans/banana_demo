@@ -80,9 +80,9 @@ The `banana` library itself is structured in a `boost` like fashion. Some parts 
 This results in three targets being defined:
 1. banana: used to pull in the include directory. Clients only using the header only part can link to the banana target to make sure their include paths are properly configured.
 
-2. banana_box: Clients using the `box.hpp` header also need boost. The `banana_box` target ensures that the correct libraries from boost are linked in. It is however important to notice that it is the responsibility of the client to actually make sure `boost` is found and properly configured before use. In tis case this means that the targets `Boost::boost` and `Boost::filesystem` should exist.
+2. banana_box/Banana::box: Clients using the `box.hpp` header also need boost. The `banana_box/Banana::box` target ensures that the correct libraries from boost are linked in. It is however important to notice that it is the responsibility of the client to actually make sure `boost` is found and properly configured before use. In tis case this means that the targets `Boost::boost` and `Boost::filesystem` should exist.
 
-3. banana_peel: This is an actual library. No special features here.
+3. banana_peel/Banana::peel: This is an actual library. No special features here.
 
 One of the goals of the new Cmake approach is to have as little dependencies as possible. Therefore, an ideal library setup knows nothing of its surroundings, except for some target names. In this way, libraries can be extracted and moved to different projects. Or made into standalone projects.
 
@@ -111,6 +111,6 @@ Build and install the project using your prefered method:
 ### client executable
 Create a `client_build` directory next to the `client` directory.
 
-Configure CMake again as before (you can skipp the install however), but add one extra cache variable `banana_DIR` either on the command line with `-D` or in the GUI. This variable will be used by find_package to locate the bananaConfig.cmake file and import the proper targets. You have two options here. You can either use `../install/share/banana/cmake` to use the installed version of the library. Or you can use `../build/banana` to use the _development_ version of the library straight out of the build directory.
+Configure CMake again as before (you can skipp the install however), but add one extra cache variable `Banana_DIR` either on the command line with `-D` or in the GUI. This variable will be used by find_package to locate the BananaConfig.cmake file and import the proper targets. You have two options here. You can either use `../install/share/banana/cmake` to use the installed version of the library. Or you can use `../build/banana` to use the _development_ version of the library straight out of the build directory.
 
 You can build with `make VERBOSE=y` or inspect the configuration in VisualStudio to verify that all the correct dependencies in terms of include directories and link libraries have been configured correctly.
